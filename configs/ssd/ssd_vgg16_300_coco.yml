@@ -1,0 +1,14 @@
+_BASE_: [
+  '../datasets/visdrone_detection.yml',
+  '../runtime.yml',
+  '_base_/optimizer_540e.yml',
+  '_base_/ssd_vgg16_300.yml',
+  '_base_/ssd_reader.yml',
+]
+weights: output/ssd_vgg16_300_240e_coco/model_final
+
+# set collate_batch to false because ground-truth info is needed
+# on voc dataset and should not collate data in batch when batch size
+# is larger than 1.
+EvalReader:
+  collate_batch: false
